@@ -43,7 +43,7 @@ git clone https://github.com/peter-moran/jetson_csi_cam.git
 ```
 
 ## 2. Install `gscam` with gstreamer-1.0 support
-
+### This step is not needed with the arpg gscam fork
 Clone `gscam` into your `catkin_workspace`.
 
 ```
