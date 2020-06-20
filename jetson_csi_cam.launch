@@ -6,7 +6,7 @@
   <arg name="sync_sink" default="true" />                    <!-- Synchronize the app sink. Setting this to false may resolve problems with sub-par framerates. -->
   <arg name="width" default="1280" />                        <!-- Image Width -->
   <arg name="height" default="720" />                       <!-- Image Height -->
-  <arg name="fps" default="30" />                            <!-- Desired framerate. True framerate may not reach this if set too high. -->
+  <arg name="fps" default="15" />                            <!-- Desired framerate. True framerate may not reach this if set too high. -->
 
   <!-- Make arguments available to parameter server -->
   <param name="$(arg cam_name)/camera_id" type="int" value="$(arg sensor_id)" />
@@ -17,7 +17,7 @@
   <!-- Define the GSCAM pipeline -->
 <env name="GSCAM_CONFIG" value="nvarguscamerasrc sensor-id=$(arg sensor_id) ! 
 video/x-raw(memory:NVMM), width=(int)$(arg width), height=(int)$(arg height), 
-format=(string)NV12, framerate=(fraction)$(arg fps)/1 ! nvvidconv flip-method=0 ! 
+format=(string)NV12, framerate=(fraction)$(arg fps)/1 ! nvvidconv flip-method=2 ! 
 video/x-raw, format=(string)BGRx ! videoconvert"/>
 
   
