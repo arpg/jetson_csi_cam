@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <arg name="sensor_id" default="0"/>
+<!--Camera 0 must run for other streams to run-->
+    <include file="$(find jetson_csi_cam)/jetson_csi_cam.launch">
+        <arg name="sensor_id" default="0"/>
+    </include>
+    <group unless="$(eval arg('sensor_id') == 0)">
+        <include file="$(find jetson_csi_cam)/jetson_csi_cam.launch">
+            <arg name="sensor_id" default="$(arg sensor_id)"/>
+        </include>
+    </group>
+    
+    <!--Camera Calibration Node-->
+    <node pkg="camera_calibration" type="cameracalibrator.py" name="cameracalibrator" output="screen"
+    args="--size 8x6 --square 0.02995 image:=/csi_cam_$(arg sensor_id)/image_raw camera:=/csi_cam_$(arg sensor_id)" /> 
+   
+    </launch>
+
+
